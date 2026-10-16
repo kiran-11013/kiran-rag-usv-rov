@@ -1,0 +1,21 @@
+
+services:
+  rag-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: kiran-rag-api:1.0
+    container_name: kiran-rag-container
+
+    ports:
+      - "127.0.0.1:8000:8000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./faiss_store:/app/faiss_store:ro
+      - ./data:/app/data:ro
+
+    restart: unless-stopped
